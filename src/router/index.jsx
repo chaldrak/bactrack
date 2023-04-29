@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../components/header";
 import Home from "../pages/home";
 import Footer from "../components/footer";
+import { ToastContainer } from "react-toastify";
 
 const Routage = () => {
   return (
@@ -13,6 +14,7 @@ const Routage = () => {
           <Route path="/" element={<Home />} />
         </Routes>
         <Footer />
+        <ToastContainer />
       </Router>
     </div>
   );

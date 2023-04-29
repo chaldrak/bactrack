@@ -3,6 +3,7 @@ import createAxiosInstance from "../../services/axios-instance";
 import BaseBackdrop from "../mui/backdrop";
 import ResponsiveDialog from "../mui/dialog";
 import QuickSearchTable from "../common/quick-search-table";
+import { errorToast } from "../../utils/toast";
 
 const QuickSearchForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +30,7 @@ const QuickSearchForm = () => {
       setOpen(true);
     } catch (error) {
       console.log(error);
+      errorToast("Aucun candidat ne correspond à ce numéro.");
     } finally {
       setIsLoading(false);
     }
