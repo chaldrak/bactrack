@@ -29,7 +29,7 @@ const BaseButton = ({
     return (
       <Link
         to={to}
-        className={`font-medium flex items-center py-2 px-4 rounded-md transition-colors ${createTheme(
+        className={`font-medium flex items-center justify-center py-2 px-4 rounded-md transition-colors ${createTheme(
           variant
         )} ${createBorder(border)}`}
         rel="noreferer"
