@@ -28,3 +28,7 @@ body {
 ::-webkit-scrollbar-thumb {
     @apply bg-slate-700;
 }
+
+option:hover {
+    background: #1882A8;
+}

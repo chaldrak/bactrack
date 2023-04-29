@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const user = false;
   return (
-    <header className="sticky top-0 w-full z-40 border-b border-b-slate-700">
-      <div className="container flex h-16 items-center space-x-4 mx-10 justify-between">
+    <header className="sticky top-0 w-full z-40 border-b border-b-slate-700 bg-slate-900">
+      <div className="flex h-16 items-center space-x-4 mx-10 justify-between">
         <div>
-          <GlobalNav menu={siteConfig.menuNav} />
+          <GlobalNav />
         </div>
         <nav className="flex items-center space-x-4">
           {siteConfig.menuNav.map((item, index) => (
