@@ -6,7 +6,7 @@ import BaseButton from "../common/base-button";
 const HeroSection = () => {
   return (
     <section className="w-full h-[calc(100vh_-_65px)]">
-      <div className="w-full h-full mx-auto px-10 lg:px-0 lg:max-w-3xl py-12 sm:py-32">
+      <div className="w-full h-full mx-auto px-5 sm:px-10 lg:px-0 lg:max-w-3xl py-12 sm:py-32">
         <h1 className="text-3xl sm:text-5xl tracking-tight font-bold text-center">
           Obtenez vos résultats du{" "}
           <span className="text-sky-400">baccalauréat</span> en un clic!
