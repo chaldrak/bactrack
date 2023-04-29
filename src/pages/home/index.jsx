@@ -22,10 +22,10 @@ const Home = () => {
     });
   }
   return (
-    <main>
+    <>
       <HeroSection />
       <QuickSearchSection />
-    </main>
+    </>
   );
 };
 
