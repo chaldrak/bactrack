@@ -4,6 +4,7 @@ import BaseBackdrop from "../mui/backdrop";
 import ResponsiveDialog from "../mui/dialog";
 import QuickSearchTable from "../common/quick-search-table";
 import { errorToast } from "../../utils/toast";
+import BaseButton from "../common/base-button";
 
 const QuickSearchForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -65,13 +66,19 @@ const QuickSearchForm = () => {
         value={form.tableNumber}
         onChange={handleChange}
       />
-      <button
+      {/* <button
         type="submit"
         disabled={!form.session || !form.tableNumber}
         className="w-full py-2 rounded-md bg-sky-700 disabled:cursor-not-allowed font-medium hover:bg-sky-800 disabled:bg-sky-800"
       >
         Rechercher
-      </button>
+      </button> */}
+      <BaseButton
+        tag="button"
+        title="Rechercher"
+        type="submit"
+        disabled={!form.session || !form.tableNumber}
+      />
       <BaseBackdrop isLoading={isLoading} />
       <ResponsiveDialog
         open={open}

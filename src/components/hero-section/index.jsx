@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import BaseButton from "../common/base-button";
 
 const HeroSection = () => {
   return (
@@ -24,19 +25,24 @@ const HeroSection = () => {
           .
         </p>
         <div className="mt-10 flex items-center justify-center space-x-10">
-          <Link
+          <BaseButton
             to="#recherche-rapide"
-            className="py-2 px-4 border border-slate-500 hover:bg-slate-800 rounded-md bg-slate-700 font-medium"
-          >
-            Recherche rapide
-          </Link>
-          <Link
-            to="/"
-            className="flex items-center space-x-2 font-medium rounded-md border py-2 px-4 border-sky-700 text-sky-400 hover:bg-sky-950"
+            title="Recherche rapide"
+            variant="contain"
+            tag="Link"
+            border={true}
+          />
+          <BaseButton
+            to=""
+            tag="Link"
+            title="Se connecter avec Google"
+            iconLabel="GitHub"
+            href="/"
+            variant="outline"
+            border={true}
           >
             <FcGoogle size={25} />
-            <span>Se connecter avec Google</span>
-          </Link>
+          </BaseButton>
         </div>
       </div>
     </section>

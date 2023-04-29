@@ -1,10 +1,9 @@
 import React from "react";
 import GlobalNav from "../navbar";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { siteConfig } from "../../config";
 import { Link } from "react-router-dom";
+import BaseButton from "../common/base-button";
 
 const Header = () => {
   const user = false;
@@ -16,35 +15,23 @@ const Header = () => {
         </div>
         <nav className="flex items-center space-x-4">
           {siteConfig.menuNav.map((item, index) => (
-            <Link
-              to={item.href}
+            <BaseButton
               key={index}
-              className="font-medium py-2 px-4 hover:bg-slate-800 rounded-md bg-slate-700"
-            >
-              {item.title}
-            </Link>
+              tag="Link"
+              title={item.title}
+              to={item.href}
+              variant="contain"
+            />
           ))}
 
           {!user && (
             <>
-              <a
-                href="/"
-                target="_blank"
-                rel="noreferer"
-                className="border p-2 rounded-md border-transparent hover:bg-slate-800 transition-colors text-gray-400 hover:text-white text-xl"
-              >
+              <BaseButton tag="a" iconLabel="GitHub" href="/" variant="menu">
                 <FaGithub size={25} />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a
-                href="/"
-                target="_blank"
-                rel="noreferer"
-                className="border p-2 rounded-md border-transparent hover:bg-slate-800 transition-colors text-gray-400 hover:text-white"
-              >
+              </BaseButton>
+              <BaseButton tag="a" iconLabel="Twitter" href="/" variant="menu">
                 <FaTwitter size={25} />
-                <span className="sr-only">Twitter</span>
-              </a>
+              </BaseButton>
             </>
           )}
         </nav>
