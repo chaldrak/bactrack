@@ -1,8 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 const HeroSection = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const hash = location.hash;
+    const section = document.getElementById(hash.substring(1));
+
+    section && scrollToTarget(section, 70);
+
+    function scrollToTarget(element, offset) {
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }, [location]);
   return (
     <section className="w-full h-[calc(100vh_-_65px)]">
       <div className="w-full h-full mx-auto text-center max-w-3xl py-32">
@@ -25,7 +42,7 @@ const HeroSection = () => {
         </p>
         <div className="mt-10 flex items-center justify-center space-x-10">
           <Link
-            to="/"
+            to="#recherche-rapide"
             className="py-2 px-4 border border-slate-500 hover:bg-slate-800 rounded-md bg-slate-700 font-medium"
           >
             Recherche rapide

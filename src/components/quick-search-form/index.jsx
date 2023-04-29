@@ -29,7 +29,6 @@ const QuickSearchForm = () => {
       setResult(response.data);
       setOpen(true);
     } catch (error) {
-      console.log(error);
       errorToast("Aucun candidat ne correspond à ce numéro.");
     } finally {
       setIsLoading(false);
