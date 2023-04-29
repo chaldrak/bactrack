@@ -4,7 +4,7 @@ import BaseButton from "../common/base-button";
 
 const Footer = () => {
   return (
-    <footer className="px-10 border-t border-slate-700 h-24 w-full flex items-center justify-between">
+    <footer className="px-10 border-t border-slate-700 h-40 sm:h-24 w-full flex-col sm:flex-row flex items-center sm:justify-between justify-center space-y-2 sm:space-y-0">
       <p>
         Made with ❤️ by <span className="font-black">Le Dev Matheux</span>
       </p>

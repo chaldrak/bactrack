@@ -6,12 +6,12 @@ import BaseButton from "../common/base-button";
 const HeroSection = () => {
   return (
     <section className="w-full h-[calc(100vh_-_65px)]">
-      <div className="w-full h-full mx-auto text-center max-w-3xl py-32">
-        <h1 className="text-5xl tracking-tight font-bold">
+      <div className="w-full h-full mx-auto px-10 lg:px-0 lg:max-w-3xl py-12 sm:py-32">
+        <h1 className="text-3xl sm:text-5xl tracking-tight font-bold text-center">
           Obtenez vos résultats du{" "}
           <span className="text-sky-400">baccalauréat</span> en un clic!
         </h1>
-        <p className="mt-6 text-slate-400">
+        <p className="mt-6 text-slate-400 sm:text-center text-justify">
           Bienvenue sur <span className="font-bold text-white">BACTrack</span>,
           le site web qui vous permet de consulter facilement et rapidement les
           résultats du baccalauréat{" "}
@@ -19,12 +19,15 @@ const HeroSection = () => {
           ligne. Vous êtes chef d'établissement, plus besoin de perdre du temps
           à chercher un à un les résultats de vos candidats. Avec BACTrack, vous
           pouvez obtenir vos résultats en un seul clic. Pour en savoir plus,{" "}
-          <Link to="/guide" className="text-sky-400 hover:underline">
+          <Link
+            to="/guide"
+            className="text-sky-400 hover:underline whitespace-nowrap"
+          >
             consulter le guide &rarr;
           </Link>
           .
         </p>
-        <div className="mt-10 flex items-center justify-center space-x-10">
+        <div className="mt-10 sm:flex space-y-5 sm:space-y-0 items-center justify-center sm:space-x-10">
           <BaseButton
             to="#recherche-rapide"
             title="Recherche rapide"
