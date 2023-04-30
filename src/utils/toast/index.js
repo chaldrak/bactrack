@@ -9,3 +9,7 @@ const options = {
 export const errorToast = (message) => {
   toast.error(message, options);
 };
+
+export const successToast = (message) => {
+  toast.success(message, options);
+};

@@ -12,6 +12,7 @@ const BaseButton = ({
   title,
   iconLabel,
   type,
+  onClick,
 }) => {
   if (tag === "a")
     return (
@@ -49,6 +50,21 @@ const BaseButton = ({
         type={type}
       >
         {title}
+      </button>
+    );
+
+  if (tag === "google")
+    return (
+      <button
+        className={`font-medium flex items-center justify-center py-2 px-4 rounded-md transition-colors ${createTheme(
+          variant
+        )} ${createBorder(border)} 
+          disabled:hover:bg-transparent disabled:cursor-default`}
+        disabled={disabled}
+        onClick={onClick}
+      >
+        {children}
+        <span className="whitespace-nowrap">{title}</span>
       </button>
     );
 };
