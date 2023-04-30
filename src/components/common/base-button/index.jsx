@@ -56,7 +56,7 @@ const BaseButton = ({
   if (tag === "google")
     return (
       <button
-        className={`font-medium flex items-center justify-center py-2 px-4 rounded-md transition-colors ${createTheme(
+        className={`font-medium flex items-center justify-center w-full sm:w-fit py-2 px-4 rounded-md transition-colors ${createTheme(
           variant
         )} ${createBorder(border)} 
           disabled:hover:bg-transparent disabled:cursor-default`}

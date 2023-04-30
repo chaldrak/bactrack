@@ -7,7 +7,7 @@ import BaseButton from "../common/base-button";
 import { signInWithPopup } from "firebase/auth";
 import { auth as aunthenticate, provider } from "../../../firebase/config";
 import useAuth from "../../hooks/authentication";
-import { successToast } from "../../utils/toast";
+import { errorToast, successToast } from "../../utils/toast";
 
 const HeroSection = () => {
   const [auth, setAuth] = useAuth();
@@ -28,6 +28,7 @@ const HeroSection = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         const email = error.customData.email;
+        errorToast(errorMessage);
       })
       .finally(() => {
         setIsLoading(false);
