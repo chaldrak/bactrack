@@ -9,24 +9,32 @@ import Header from "../components/header";
 import Home from "../pages/home";
 import Footer from "../components/footer";
 import { ToastContainer } from "react-toastify";
+import Dashboard from "../pages/dashboard";
+import AuthRequired from "../components/authentication";
+import { DataProvider } from "../context";
 
 const Routage = () => {
   return (
     <div>
       <Router>
-        <Header />
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/guide" element={<div />} />
+        <DataProvider>
+          <Header />
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/guide" element={<div />} />
 
-          {/* Protected routes */}
+            {/* Protected routes */}
+            <Route element={<AuthRequired />}>
+              <Route path="/tableau-de-bord" element={<Dashboard />} />
+            </Route>
 
-          {/* Catch all routes */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Footer />
-        <ToastContainer />
+            {/* Catch all routes */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Footer />
+          <ToastContainer />
+        </DataProvider>
       </Router>
     </div>
   );
