@@ -20,7 +20,7 @@ const DrawerContent = ({ toggleDrawer }) => {
       });
   };
   return (
-    <aside className="w-full h-[100vh] flex flex-col justify-between">
+    <aside className="w-full h-[100lvh] flex flex-col justify-between">
       <div className="p-7">
         <h2 className="text-lg font-bold">
           Bonjour {user.displayName.split(" ").at(0)} 👋
