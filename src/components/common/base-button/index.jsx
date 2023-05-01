@@ -5,6 +5,7 @@ const BaseButton = ({
   to,
   href,
   variant,
+  theme,
   disabled,
   border,
   children,
@@ -19,7 +20,10 @@ const BaseButton = ({
       <a
         href={href}
         target="_blank"
-        className={`p-2 rounded-md transition-colors ${createTheme(variant)}`}
+        className={`p-2 rounded-md transition-colors ${createTheme(
+          variant,
+          theme
+        )}`}
         rel="noreferer"
       >
         {children}
@@ -31,7 +35,8 @@ const BaseButton = ({
       <Link
         to={to}
         className={`font-medium flex items-center justify-center py-2 px-4 rounded-md transition-colors ${createTheme(
-          variant
+          variant,
+          theme
         )} ${createBorder(border)}`}
         rel="noreferer"
       >
@@ -44,10 +49,12 @@ const BaseButton = ({
     return (
       <button
         className={`w-full py-2 rounded-md bg-sky-700 disabled:cursor-not-allowed font-medium hover:bg-sky-800 disabled:bg-sky-800 ${createTheme(
-          variant
+          variant,
+          theme
         )} ${createBorder(border)}`}
         disabled={disabled}
         type={type}
+        onClick={onClick}
       >
         {title}
       </button>
@@ -57,7 +64,8 @@ const BaseButton = ({
     return (
       <button
         className={`font-medium flex items-center justify-center w-full sm:w-fit py-2 px-4 rounded-md transition-colors ${createTheme(
-          variant
+          variant,
+          theme
         )} ${createBorder(border)} 
           disabled:hover:bg-transparent disabled:cursor-default`}
         disabled={disabled}
@@ -71,11 +79,15 @@ const BaseButton = ({
 
 export default BaseButton;
 
-const createTheme = (variant) => {
+const createTheme = (variant, theme) => {
   if (variant === "menu")
     return "hover:bg-slate-800 text-gray-400 hover:text-white";
   if (variant === "contain")
-    return "hover:bg-slate-800 bg-slate-700 text-white border-slate-500";
+    return `${
+      theme === "red"
+        ? "hover:bg-red-800 hover:border-red-800"
+        : "hover:bg-slate-800"
+    } bg-slate-700 text-white border-slate-500`;
   if (variant === "outline")
     return "space-x-2 border-sky-700 text-sky-400 hover:bg-sky-950";
 };

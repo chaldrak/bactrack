@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../../firebase/config";
-import { MdFrontLoader } from "react-icons/md";
+import { ImSpinner9 } from "react-icons/im";
 
 const DataContext = createContext({ user: null });
 
@@ -29,7 +29,7 @@ export const DataProvider = ({ children }) => {
     >
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center">
-          <MdFrontLoader className="animate-spin" />
+          <ImSpinner9 size={25} className="animate-spin" />
         </div>
       ) : (
         children

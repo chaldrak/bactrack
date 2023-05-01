@@ -10,19 +10,19 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 
-export default function BaseDrawer({ children, button }) {
-  const [open, setOpen] = useState(false);
+export default function BaseDrawer({ children, button, open, toggleDrawer }) {
+  // const [open, setOpen] = useState(false);
 
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
+  // const toggleDrawer = (open) => (event) => {
+  //   if (
+  //     event.type === "keydown" &&
+  //     (event.key === "Tab" || event.key === "Shift")
+  //   ) {
+  //     return;
+  //   }
 
-    setOpen(open);
-  };
+  //   setOpen(open);
+  // };
 
   const list = () => (
     <Box
@@ -30,7 +30,6 @@ export default function BaseDrawer({ children, button }) {
         width: 300,
       }}
       role="presentation"
-      onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       {/* <List>
