@@ -1,18 +1,39 @@
+import { onAuthStateChanged } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
+import { auth } from "../../firebase/config";
+import { MdFrontLoader } from "react-icons/md";
 
-const DataContext = createContext();
+const DataContext = createContext({ user: null });
 
 export const DataProvider = ({ children }) => {
-  const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem("auth")) || null
-  );
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    localStorage.setItem("auth", JSON.stringify(auth));
-  }, [auth]);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
   return (
-    <DataContext.Provider value={{ auth: [auth, setAuth] }}>
-      {children}
+    <DataContext.Provider
+      value={{
+        user,
+      }}
+    >
+      {isLoading ? (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <MdFrontLoader className="animate-spin" />
+        </div>
+      ) : (
+        children
+      )}
     </DataContext.Provider>
   );
 };

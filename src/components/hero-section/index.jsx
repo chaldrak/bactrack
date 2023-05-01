@@ -10,7 +10,7 @@ import useAuth from "../../hooks/authentication";
 import { errorToast, successToast } from "../../utils/toast";
 
 const HeroSection = () => {
-  const [auth, setAuth] = useAuth();
+  const user = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const HeroSection = () => {
       .then((result) => {
         const user = result.user;
         console.log(result.user);
-        setAuth(user);
+        // setAuth(user);
         successToast("Bienvenue sur BACTrack 👋 !!!");
       })
       .catch((error) => {
@@ -65,7 +65,7 @@ const HeroSection = () => {
             tag="Link"
             border={true}
           />
-          {!auth ? (
+          {!user ? (
             <BaseButton
               tag="google"
               title="Se connecter avec Google"
