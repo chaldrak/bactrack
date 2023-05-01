@@ -7,6 +7,7 @@ import useAuth from "../../hooks/authentication";
 import { Avatar } from "@mui/material";
 import BaseDrawer from "../mui/drawer";
 import DrawerContent from "../drawer-content";
+import { TbArticle } from "react-icons/tb";
 
 const Header = () => {
   const user = useAuth();
@@ -29,15 +30,17 @@ const Header = () => {
         <div>
           <GlobalNav />
         </div>
-        <nav className="flex items-center space-x-4">
+        <nav className="flex items-center space-x-5">
           {siteConfig.menuNav.map((item, index) => (
             <BaseButton
               key={index}
               tag="Link"
-              title={item.title}
+              title={"Guide"}
               to={item.href}
               variant="contain"
-            />
+            >
+              <TbArticle size={20} className="mr-2" />
+            </BaseButton>
           ))}
 
           {user ? (
