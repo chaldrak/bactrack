@@ -34,7 +34,7 @@ const BaseButton = ({
     return (
       <Link
         to={to}
-        className={`font-medium flex items-center justify-center py-2 px-4 rounded-md transition-colors ${createTheme(
+        className={`font-medium flex items-center justify-center py-2 px-4 space-x-2 rounded-md transition-colors ${createTheme(
           variant,
           theme
         )} ${createBorder(border)}`}
@@ -87,11 +87,17 @@ const createTheme = (variant, theme) => {
       theme === "red"
         ? "hover:bg-red-800 hover:border-red-800"
         : theme === "blue"
-        ? "hover:bg-sky-800"
-        : "hover:bg-slate-800"
-    } bg-slate-700 text-white border-slate-500`;
+        ? "hover:bg-sky-950 bg-sky-800 text-sky-400 border-sky-500"
+        : theme === "white"
+        ? "hover:bg-slate-800 hover:border-slate-800 hover:text-white bg-white text-slate-900 border-white"
+        : "hover:bg-slate-800 bg-slate-700 text-white border-slate-500"
+    } `;
   if (variant === "outline")
-    return "space-x-2 border-sky-700 text-sky-400 hover:bg-sky-950";
+    return `${
+      theme === "blue"
+        ? "space-x-2 border-sky-700 text-sky-400 hover:bg-sky-950"
+        : "space-x-2 border-slate-700 text-white hover:bg-slate-800"
+    }`;
 };
 
 const createBorder = (border) => {

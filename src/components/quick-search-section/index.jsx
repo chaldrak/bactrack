@@ -5,7 +5,7 @@ const QuickSearchSection = () => {
   return (
     <section
       id="recherche-rapide"
-      className="w-full h-fit sm:h-[60vh] border-t border-slate-700 px-5 sm:px-10 grid sm:grid-cols-2 gap-10 py-10"
+      className="w-full h-fit lg:h-[60vh] border-t border-slate-700 px-5 sm:px-10 grid sm:grid-cols-2 gap-10 py-10"
     >
       <div className="">
         <h2 className="text-3xl sm:text-4xl font-bold mb-6">

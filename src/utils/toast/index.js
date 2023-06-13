@@ -4,6 +4,7 @@ const options = {
   theme: "colored",
   autoClose: 3000,
   hideProgressBar: true,
+  position: "bottom-right",
 };
 
 export const errorToast = (message) => {

@@ -20,7 +20,7 @@ const DrawerContent = ({ toggleDrawer }) => {
       });
   };
   return (
-    <aside className="w-full h-[100lvh] flex flex-col justify-between">
+    <aside className="relative w-[300px]">
       <div className="p-7">
         <h2 className="text-lg font-bold">
           Bonjour {user.displayName.split(" ").at(0)} 👋
@@ -46,7 +46,7 @@ const DrawerContent = ({ toggleDrawer }) => {
           />
         </div>
       </div>
-      <div className="flex items-center space-x-2 border-t p-7 border-slate-700">
+      <div className="fixed bottom-0 right-0 w-[300px] flex items-center space-x-2 border-t p-7 border-slate-700">
         <Avatar
           alt={user.displayName}
           src={user.photoURL}
