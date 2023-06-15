@@ -71,6 +71,7 @@ const HeroSection = () => {
               title="Se connecter avec Google"
               iconLabel="Google"
               variant="outline"
+              theme="blue"
               border={true}
               onClick={loginWithGoogle}
               disabled={isLoading}
@@ -86,6 +87,7 @@ const HeroSection = () => {
               to="/tableau-de-bord"
               title="Votre tableau de bord"
               variant="outline"
+              theme="blue"
               tag="Link"
               border={true}
             >

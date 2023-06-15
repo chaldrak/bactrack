@@ -3,6 +3,7 @@ import BaseButton from "../../components/common/base-button";
 import { FiUser } from "react-icons/fi";
 import { BiPlusCircle } from "react-icons/bi";
 import { Alert } from "@mui/material";
+import BaseClassCard from "../../components/common/class-card";
 
 const files = [
   {
@@ -62,23 +63,7 @@ const Dashboard = () => {
           className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
         >
           {files.map((file) => (
-            <li key={file.source} className="relative">
-              <div className="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-slate-800 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
-                <button
-                  type="button"
-                  className="absolute inset-0 focus:outline-none"
-                >
-                  <span className="sr-only">View details for {file.title}</span>
-                  <span className="group-hover:scale-150 block w-20 h-20 mx-auto rounded-full bg-slate-900"></span>
-                </button>
-              </div>
-              <p className="pointer-events-none mt-2 block truncate text-sm font-medium text-slate-400">
-                {file.title}
-              </p>
-              <p className="pointer-events-none block mt-1 text-sm font-medium text-slate-500">
-                {file.size}
-              </p>
-            </li>
+            <BaseClassCard {...file} />
           ))}
         </ul>
       </div>
@@ -89,22 +74,7 @@ const Dashboard = () => {
           className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
         >
           {files.map((file) => (
-            <li key={file.source} className="relative">
-              <div className="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-slate-800 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
-                <button
-                  type="button"
-                  className="absolute inset-0 focus:outline-none"
-                >
-                  <span className="sr-only">View details for {file.title}</span>
-                </button>
-              </div>
-              <p className="pointer-events-none mt-2 block truncate text-sm font-medium text-slate-400">
-                {file.title}
-              </p>
-              <p className="pointer-events-none block mt-1 text-sm font-medium text-slate-500">
-                {file.size}
-              </p>
-            </li>
+            <BaseClassCard {...file} />
           ))}
         </ul>
       </div>
