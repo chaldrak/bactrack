@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import Dashboard from "../pages/dashboard";
 import AuthRequired from "../components/authentication";
 import { DataProvider } from "../context";
+import CreateClass from "../pages/create-class";
 
 const Routage = () => {
   return (
@@ -27,6 +28,8 @@ const Routage = () => {
             {/* Protected routes */}
             <Route element={<AuthRequired />}>
               <Route path="/tableau-de-bord" element={<Dashboard />} />
+              <Route path="/creer-une-classe" element={<CreateClass />} />
+              <Route path="/mon-profil" element={<div />} />
             </Route>
 
             {/* Catch all routes */}

@@ -36,7 +36,7 @@ const Dashboard = () => {
       </Alert> */}
       <div className="mb-10 border-b border-slate-700 pb-10 sm:flex space-y-5 sm:space-y-0 items-center justify-between sm:space-x-10">
         <BaseButton
-          to="/tableau-de-bord"
+          to="/creer-une-classe"
           title="Créer une nouvelle classe"
           variant="contain"
           theme="white"

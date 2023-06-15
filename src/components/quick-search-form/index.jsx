@@ -66,13 +66,6 @@ const QuickSearchForm = () => {
         value={form.tableNumber}
         onChange={handleChange}
       />
-      {/* <button
-        type="submit"
-        disabled={!form.session || !form.tableNumber}
-        className="w-full py-2 rounded-md bg-sky-700 disabled:cursor-not-allowed font-medium hover:bg-sky-800 disabled:bg-sky-800"
-      >
-        Rechercher
-      </button> */}
       <BaseButton
         tag="button"
         title="Rechercher"
