@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../../firebase/config";
 import { ImSpinner9 } from "react-icons/im";
+import SpinLoader from "../components/common/spin-loader";
 
 const DataContext = createContext({ user: null });
 
@@ -29,7 +30,7 @@ export const DataProvider = ({ children }) => {
     >
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center">
-          <ImSpinner9 size={25} className="animate-spin" />
+          <SpinLoader loading={isLoading} />
         </div>
       ) : (
         children
