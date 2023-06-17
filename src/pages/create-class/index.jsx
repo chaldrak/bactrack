@@ -6,10 +6,17 @@ import ResponsiveDialog from "../../components/mui/dialog";
 import AlertDialogSlide from "../../components/mui/confirm-dialog";
 import useAuth from "../../hooks/authentication";
 import { schoolYears, series } from "../../constants";
+import { addDoc } from "firebase/firestore";
+import { colRef } from "../../../firebase/config";
+import { useNavigate } from "react-router-dom";
+import BaseBackdrop from "../../components/mui/backdrop";
+import { errorToast, successToast } from "../../utils/toast";
 
 const CreateClass = () => {
   const user = useAuth();
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     schoolYear: `${schoolYears[0]}`,
@@ -36,12 +43,26 @@ const CreateClass = () => {
   };
 
   const saveClass = () => {
+    setIsLoading(true);
     const credentials = {
       ...formData,
       students: studentsPerSerie,
       user_id: user.uid,
     };
-
+    addDoc(colRef, credentials)
+      .then(() => {
+        navigate("/tableau-de-bord", { replace: true });
+        setStudents([]);
+        setStudentsPerSerie([]);
+        successToast("La classe a été créée avec succès.");
+      })
+      .catch((error) => {
+        console.log(error);
+        errorToast(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
     console.log(credentials);
   };
 
@@ -59,6 +80,7 @@ const CreateClass = () => {
         onSubmit={handleSubmit}
       />
 
+      <BaseBackdrop isLoading={isLoading} />
       <AlertDialogSlide open={open} setOpen={setOpen} onClick={saveClass}>
         <span className="text-white [&_strong]:text-sky-400">
           Le fichier chargé contient <strong>{studentsPerSerie.length}</strong>{" "}

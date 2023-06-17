@@ -1,6 +1,7 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import { collection, getFirestore, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
@@ -23,3 +24,11 @@ const analytics = getAnalytics(app);
 // Create a provider instance
 export const provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
+
+// Initialize services
+const db = getFirestore();
+
+// Collection ref
+export const colRef = collection(db, "classes");
+
+// Add class
