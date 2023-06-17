@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BaseButton from "../../components/common/base-button";
 import { FiUser } from "react-icons/fi";
 import { BiPlusCircle } from "react-icons/bi";
 import { Alert } from "@mui/material";
 import BaseClassCard from "../../components/common/class-card";
+import { getDocs } from "firebase/firestore";
+import { colRef } from "../../../firebase/config";
+import { schoolYears } from "../../constants";
 
 const files = [
   {
@@ -25,6 +28,25 @@ const files = [
 ];
 
 const Dashboard = () => {
+  const [classes, setClasses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = () => {
+      getDocs(colRef)
+        .then((snapshot) => {
+          let data = [];
+          snapshot.docs.forEach((doc) => {
+            data.push({ ...doc.data(), id: doc.id });
+          });
+          setClasses(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {});
+    };
+    fetchData();
+  }, []);
   return (
     <div className="min-h-[calc(100vh-65px)] sm:px-10 py-10 px-5">
       <h1 className="text-3xl font-bold mb-1">Tableau de bord</h1>
@@ -56,28 +78,23 @@ const Dashboard = () => {
           <FiUser size={20} />
         </BaseButton>
       </div>
-      <div>
-        <h3 className="text-sm font-medium text-slate-400 mb-5">2022 - 2023</h3>
-        <ul
-          role="list"
-          className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
-        >
-          {files.map((file) => (
-            <BaseClassCard {...file} />
-          ))}
-        </ul>
-      </div>
-      <div className="mt-10">
-        <h3 className="text-sm font-medium text-slate-400 mb-5">2021 - 2022</h3>
-        <ul
-          role="list"
-          className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
-        >
-          {files.map((file) => (
-            <BaseClassCard {...file} />
-          ))}
-        </ul>
-      </div>
+      {schoolYears.map((item) => (
+        <div className="mt-10" key={item}>
+          <h3 className="text-sm font-medium text-slate-400 mb-5">
+            {`${item - 1} - ${item}`}
+          </h3>
+          <ul
+            role="list"
+            className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+          >
+            {classes
+              .filter((c) => c.schoolYear === String(item))
+              .map((file) => (
+                <BaseClassCard key={file.id} {...file} />
+              ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
