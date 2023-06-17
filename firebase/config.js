@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
-import { collection, getFirestore, addDoc } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
@@ -30,5 +30,3 @@ const db = getFirestore();
 
 // Collection ref
 export const colRef = collection(db, "classes");
-
-// Add class
