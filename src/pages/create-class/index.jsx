@@ -4,13 +4,16 @@ import { BiPlusCircle } from "react-icons/bi";
 import NewClassForm from "../../components/common/new-class-form";
 import ResponsiveDialog from "../../components/mui/dialog";
 import AlertDialogSlide from "../../components/mui/confirm-dialog";
+import useAuth from "../../hooks/authentication";
+import { schoolYears, series } from "../../constants";
 
 const CreateClass = () => {
+  const user = useAuth();
   const [open, setOpen] = useState(false);
 
   const [formData, setFormData] = useState({
-    schoolYear: new Date().getFullYear(),
-    serie: "A1",
+    schoolYear: `${schoolYears[0]}`,
+    serie: series[0],
   });
 
   const [students, setStudents] = useState([]);
@@ -33,7 +36,11 @@ const CreateClass = () => {
   };
 
   const saveClass = () => {
-    const credentials = { ...formData, students: studentsPerSerie };
+    const credentials = {
+      ...formData,
+      students: studentsPerSerie,
+      user_id: user.uid,
+    };
 
     console.log(credentials);
   };
