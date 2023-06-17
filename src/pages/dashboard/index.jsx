@@ -26,7 +26,7 @@ const files = [
 
 const Dashboard = () => {
   return (
-    <div className="min-h-[calc(100vh-65px)] lg:p-10 ">
+    <div className="min-h-[calc(100vh-65px)] sm:px-10 py-10 px-5">
       <h1 className="text-3xl font-bold mb-1">Tableau de bord</h1>
       <span className="text-slate-400 mb-5 inline-block">
         Ici vous pouvez gérer vos candidats des différentes séries.

@@ -1,4 +1,4 @@
-import { SiMicrosoftexcel } from "react-icons/si";
+import { SiGoogleclassroom } from "react-icons/si";
 import BaseButton from "../base-button";
 import UploadExcelFile from "../xlsx-file-upload";
 import { Link } from "react-router-dom";
@@ -9,8 +9,13 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
   return (
     <form onSubmit={onSubmit}>
       <div className="space-y-12">
-        <div className="border-b border-t border-slate-800 pb-12">
-          <div className="sm:col-span-3 mt-10 max-w-xl">
+        <div className="border-b border-t border-slate-800 pb-12 relative">
+          <div className="hidden lg:flex justify-center items-center w-1/2 absolute right-0 top-1/2 -translate-y-1/2">
+            <div className="lg:p-32 xl:p-40 rounded-full border border-dashed text-sky-400">
+              <SiGoogleclassroom size={110} />
+            </div>
+          </div>
+          <div className="sm:col-span-3 mt-10 lg:max-w-[50%]">
             <label
               htmlFor="schoolYear"
               className="block text-sm font-medium leading-6 text-white"
@@ -35,7 +40,7 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
             </div>
           </div>
 
-          <div className="sm:col-span-3 mt-10 max-w-xl">
+          <div className="sm:col-span-3 mt-10 lg:max-w-[50%]">
             <label
               htmlFor="serie"
               className="block text-sm font-medium leading-6 text-white"
@@ -62,7 +67,7 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
             </div>
           </div>
 
-          <div className="mt-10 max-w-xl">
+          <div className="mt-10 lg:max-w-[50%]">
             <UploadExcelFile data={data} />
           </div>
         </div>
@@ -75,7 +80,7 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
         >
           Cancel
         </Link>
-        <div className="w-[300px]">
+        <div className="w-[200px] md:w-[300px]">
           <BaseButton
             tag="button"
             title="Créer"
