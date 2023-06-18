@@ -1,4 +1,18 @@
-export const series = ["A1", "A2", "B", "C", "D", "E", "F", "G1", "G2", "G3"];
+export const series = [
+  "A1",
+  "A2",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F1",
+  "F2",
+  "F3",
+  "F4",
+  "G1",
+  "G2",
+  "G3",
+];
 
 const startYear = 2021;
 
