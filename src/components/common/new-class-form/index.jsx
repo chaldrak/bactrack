@@ -74,7 +74,7 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
 
       <div className="mt-6 flex items-center justify-between gap-x-6">
         <Link
-          type="button"
+          to="/tableau-de-bord"
           className="text-sm font-semibold leading-6 text-white"
         >
           Cancel

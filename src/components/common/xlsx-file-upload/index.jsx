@@ -105,7 +105,7 @@ const UploadExcelFile = ({ data }) => {
         ) : (
           <div className="h-[105px] flex flex-col justify-center items-center gap-y-4">
             <SpinLoader loading={isLoading} />
-            <span className="text-slate-600">
+            <span className="text-slate-600 animate-pulse">
               Lecture du fichier en cours . . .
             </span>
           </div>

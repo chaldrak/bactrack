@@ -4,7 +4,7 @@ import { FiUser } from "react-icons/fi";
 import { BiPlusCircle } from "react-icons/bi";
 import { Alert } from "@mui/material";
 import BaseClassCard from "../../components/common/class-card";
-import { getDocs, query, where } from "firebase/firestore";
+import { getDocs, orderBy, query, where } from "firebase/firestore";
 import { colRef } from "../../../firebase/config";
 import { schoolYears } from "../../constants";
 import useAuth from "../../hooks/authentication";
@@ -33,7 +33,11 @@ const Dashboard = () => {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    const q = query(colRef, where("user_id", "==", user.uid));
+    const q = query(
+      colRef,
+      where("user_id", "==", user.uid),
+      orderBy("serie", "asc")
+    );
     const fetchData = () => {
       getDocs(q)
         .then((snapshot) => {
