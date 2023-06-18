@@ -13,6 +13,7 @@ import Dashboard from "../pages/dashboard";
 import AuthRequired from "../components/authentication";
 import { DataProvider } from "../context";
 import CreateClass from "../pages/create-class";
+import DetailsClass from "../pages/details-class";
 
 const Routage = () => {
   return (
@@ -30,6 +31,7 @@ const Routage = () => {
               <Route path="/tableau-de-bord" element={<Dashboard />} />
               <Route path="/creer-une-classe" element={<CreateClass />} />
               <Route path="/mon-profil" element={<div />} />
+              <Route path="/classes/:id" element={<DetailsClass />} />
             </Route>
 
             {/* Catch all routes */}

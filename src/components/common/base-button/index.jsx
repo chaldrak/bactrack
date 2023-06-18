@@ -48,7 +48,7 @@ const BaseButton = ({
   if (tag === "button")
     return (
       <button
-        className={`w-full py-2 rounded-md bg-sky-700 disabled:cursor-not-allowed font-medium disabled:bg-sky-800 ${createTheme(
+        className={`w-full py-2 rounded-md disabled:cursor-not-allowed font-medium ${createTheme(
           variant,
           theme
         )} ${createBorder(border)}`}
@@ -85,9 +85,9 @@ const createTheme = (variant, theme) => {
   if (variant === "contain")
     return `${
       theme === "red"
-        ? "hover:bg-red-800 hover:border-red-800"
+        ? "hover:bg-red-800 bg-red-600 border-red-800 hover:border-red-800"
         : theme === "blue"
-        ? "hover:bg-sky-950 bg-sky-800 text-sky-400 border-sky-500"
+        ? "hover:bg-sky-950 bg-sky-700 text-sky-50 border-sky-500 disabled:bg-sky-800"
         : theme === "white"
         ? "hover:bg-slate-800 hover:border-slate-800 hover:text-white bg-white text-slate-900 border-white"
         : "hover:bg-slate-800 bg-slate-700 text-white border-slate-500"

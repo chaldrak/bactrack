@@ -83,6 +83,8 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
           <BaseButton
             tag="button"
             title="Créer"
+            theme="blue"
+            variant="contain"
             type="submit"
             disabled={students.length === 0}
           />

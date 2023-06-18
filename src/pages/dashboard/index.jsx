@@ -9,25 +9,6 @@ import { colRef } from "../../../firebase/config";
 import { schoolYears } from "../../constants";
 import useAuth from "../../hooks/authentication";
 
-const files = [
-  {
-    title: "TERMINALE A1",
-    size: "17",
-  },
-  {
-    title: "TERMINALE A2",
-    size: "65",
-  },
-  {
-    title: "TERMINALE B",
-    size: "73",
-  },
-  {
-    title: "TERMINALE C",
-    size: "9",
-  },
-];
-
 const Dashboard = () => {
   const user = useAuth();
   const [classes, setClasses] = useState([]);

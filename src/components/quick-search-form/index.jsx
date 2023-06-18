@@ -69,6 +69,8 @@ const QuickSearchForm = () => {
       <BaseButton
         tag="button"
         title="Rechercher"
+        theme="blue"
+        variant="contain"
         type="submit"
         disabled={!form.session || !form.tableNumber}
       />
