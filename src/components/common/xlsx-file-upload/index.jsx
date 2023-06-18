@@ -11,6 +11,7 @@ const UploadExcelFile = ({ data }) => {
 
   const fetchData = async (e) => {
     setIsLoading(true);
+    setFileInfo(null);
     const file = e.target.files[0];
     if (
       file.type !==
@@ -42,8 +43,8 @@ const UploadExcelFile = ({ data }) => {
       >
         Liste des candidats
       </label>
-      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-slate-700 px-6 py-10">
-        {!isLoading ? (
+      <div className="mt-2 flex justify-center overflow-hidden rounded-lg border border-dashed border-slate-700 px-6 py-10">
+        {!isLoading && (
           <div className="text-center">
             <SiMicrosoftexcel
               className="mx-auto h-12 w-12 text-gray-500"
@@ -51,7 +52,7 @@ const UploadExcelFile = ({ data }) => {
             />
             {fileInfo ? (
               <>
-                <div className="mt-4 text-sm leading-6 text-slate-400 truncate">
+                <div className="mt-4 text-sm leading-6 text-slate-400">
                   <label
                     htmlFor="file-upload"
                     className="relative cursor-pointer rounded-md font-semibold text-white focus-within:outline-none focus-within:ring-offset-gray-900 hover:text-sky-600"
@@ -70,12 +71,6 @@ const UploadExcelFile = ({ data }) => {
                 <p className="text-xs leading-5 text-slate-400">
                   {(fileInfo.size / 1000).toFixed(1)} KB
                 </p>
-                {/* <p className="text-xs leading-5 text-slate-400">
-                  <span className="text-sky-600 font-bold">
-                    {students.length}
-                  </span>{" "}
-                  Candidats trouvés
-                </p> */}
               </>
             ) : (
               <>
@@ -102,7 +97,8 @@ const UploadExcelFile = ({ data }) => {
               </>
             )}
           </div>
-        ) : (
+        )}
+        {isLoading && (
           <div className="h-[105px] flex flex-col justify-center items-center gap-y-4">
             <SpinLoader loading={isLoading} />
             <span className="text-slate-600 animate-pulse">
