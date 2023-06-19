@@ -9,11 +9,19 @@ import { Link, useParams } from "react-router-dom";
 import StickyHeadTable from "../../components/mui/table-students";
 import DataTable from "../../components/mui/table-students";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
+import Pagination from "../../components/common/pagination";
+import { default_current_page } from "../../constants";
 
 const DetailsClass = () => {
   const user = useAuth();
   const [classData, setClassData] = useState({ students: [] });
   const { id } = useParams();
+
+  const [itemPerPage, setItemPerPage] = useState(40);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const lastItemIndex = currentPage * itemPerPage;
+  const firstItemIndex = lastItemIndex - itemPerPage + 1;
 
   useEffect(() => {
     const fetchData = () => {
@@ -73,7 +81,20 @@ const DetailsClass = () => {
       </div>
 
       <div className="mb-10 border-b border-slate-700 pb-10">
-        <DataTable students={classData.students} />
+        {classData.students && (
+          <Pagination
+            itemPerPage={itemPerPage}
+            totalItems={classData.students?.length}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+        <DataTable
+          students={classData.students?.slice(
+            firstItemIndex - 1,
+            lastItemIndex
+          )}
+        />
       </div>
     </div>
   );

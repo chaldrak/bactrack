@@ -22,3 +22,9 @@ export const schoolYears = Array.from(
   { length: currentYear - startYear + 1 },
   (_, i) => currentYear - i
 );
+
+const DEFAULT_PAGE = 1;
+const numberStocked = localStorage.getItem("currentPage");
+export const default_current_page = numberStocked
+  ? parseInt(numberStocked)
+  : DEFAULT_PAGE;

@@ -1,31 +1,3 @@
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-  // More people...
-];
-
 export default function DataTable({ students }) {
   console.log(students);
   return (
@@ -36,6 +8,12 @@ export default function DataTable({ students }) {
             <table className="min-w-full divide-y divide-slate-700">
               <thead className="bg-slate-500">
                 <tr className="divide-x divide-slate-700">
+                  <th
+                    scope="col"
+                    className="py-3.5 px-4 text-left text-sm font-semibold text-slate-900"
+                  >
+                    N°
+                  </th>
                   <th
                     scope="col"
                     className="py-3.5 px-4 text-left text-sm font-semibold text-slate-900"
@@ -69,11 +47,14 @@ export default function DataTable({ students }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800 bg-transparent">
-                {students.map((person) => (
+                {students.map((person, index) => (
                   <tr
                     key={person["N°Ins."]}
                     className="divide-x divide-slate-800"
                   >
+                    <td className="whitespace-nowrap p-4 text-sm font-medium text-slate-500">
+                      {index + 1}
+                    </td>
                     <td className="whitespace-nowrap p-4 text-sm font-medium text-slate-500">
                       {person["N°Ins."]}
                     </td>
