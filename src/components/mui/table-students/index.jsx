@@ -1,5 +1,4 @@
 export default function DataTable({ students }) {
-  console.log(students);
   return (
     <div className="">
       <div className="mt-8 flow-root">
