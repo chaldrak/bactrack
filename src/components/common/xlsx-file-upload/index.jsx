@@ -27,6 +27,7 @@ const UploadExcelFile = ({ data }) => {
       const excelFile = read(data);
       const excelSheet = excelFile.Sheets[excelFile.SheetNames[0]];
       const excelJson = utils.sheet_to_json(excelSheet);
+      console.log(excelJson);
       setStudents(excelJson);
     } catch (error) {
       console.log(error);

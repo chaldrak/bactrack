@@ -20,7 +20,6 @@ const HeroSection = () => {
     signInWithPopup(aunthenticate, provider)
       .then((result) => {
         const user = result.user;
-        console.log(result.user);
         // setAuth(user);
         successToast("Bienvenue sur BACTrack 👋 !!!");
       })

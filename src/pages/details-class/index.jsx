@@ -44,18 +44,18 @@ const DetailsClass = () => {
         <BiArrowBack /> <span>Retour</span>
       </Link>
       <h1 className="text-3xl font-bold mb-1">Terminale {classData?.serie}</h1>
-      <span className="text-slate-400 mb-5 inline-block">
+      <span className="text-slate-400 mb-10 inline-block">
         Année Scolaire :{" "}
         {`${classData?.schoolYear - 1} - ${classData?.schoolYear}`}
       </span>
-      <Alert className="mb-10" variant="outlined" severity="info">
+      {/* <Alert className="mb-10" variant="outlined" severity="info">
         Sur cette page vous avez la liste des candidats. Cliquez{" "}
         <a href="" className="text-slate-500 font-bold hover:text-white">
           ICI
         </a>{" "}
         pour atteindre la section{" "}
         <span className="font-bold text-slate-500">résultat</span>
-      </Alert>
+      </Alert> */}
       <div className="mb-10 border-b border-slate-700 pb-10 sm:flex space-y-5 sm:space-y-0 items-center justify-end sm:space-x-10">
         <BaseButton
           to="/mon-profil"
