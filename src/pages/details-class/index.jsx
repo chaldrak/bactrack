@@ -4,23 +4,36 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { Alert } from "@mui/material";
 import { getDoc } from "firebase/firestore";
 import { docRef } from "../../../firebase/config";
-import useAuth from "../../hooks/authentication";
 import { Link, useParams } from "react-router-dom";
 import DataTable from "../../components/mui/table-students";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
 import Pagination from "../../components/common/pagination";
-import Results from "../../components/section-results";
+import ResultsPage from "../results";
+import createAxiosInstance from "../../services/axios-instance";
+import { errorToast } from "../../utils/toast";
 
 const DetailsClass = () => {
-  const user = useAuth();
   const [classData, setClassData] = useState({ students: [] });
   const { id } = useParams();
+  const [open, setOpen] = useState(true);
+
+  const [results, setResults] = useState([]);
+  const { schoolYear, students } = classData;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const axios = createAxiosInstance(schoolYear);
 
   const [itemPerPage, setItemPerPage] = useState(40);
   const [currentPage, setCurrentPage] = useState(1);
 
   const lastItemIndex = currentPage * itemPerPage;
   const firstItemIndex = lastItemIndex - itemPerPage + 1;
+
+  const handleResults = () => {
+    setIsLoading(true);
+    setOpen(!open);
+    getResults();
+  };
 
   useEffect(() => {
     const fetchData = () => {
@@ -30,11 +43,48 @@ const DetailsClass = () => {
         })
         .catch((error) => {
           console.log(error);
+          setOpen(true);
+          errorToast("Problème de connexion. Veuillez réessayez !");
+          return;
         })
         .finally(() => {});
     };
     fetchData();
   }, []);
+
+  const getResults = async () => {
+    setResults([]);
+    setIsLoading(true);
+    try {
+      students.forEach(async (person) => {
+        await fetchResult(person["N°Tab"]);
+      });
+    } catch (error) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchResult = async (tableNumber) => {
+    try {
+      const response = await axios.get(tableNumber);
+      setResults((prev) => [...prev, response.data]);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!open)
+    return (
+      <ResultsPage
+        data={classData}
+        results={results}
+        isLoading={isLoading}
+        setOpen={setOpen}
+      />
+    );
   return (
     <div className="min-h-[calc(100vh-65px)] sm:px-10 py-10 px-5">
       <Link
@@ -48,14 +98,11 @@ const DetailsClass = () => {
         Année Scolaire :{" "}
         {`${classData?.schoolYear - 1} - ${classData?.schoolYear}`}
       </span>
-      {/* <Alert className="mb-10" variant="outlined" severity="info">
-        Sur cette page vous avez la liste des candidats. Cliquez{" "}
-        <a href="" className="text-slate-500 font-bold hover:text-white">
-          ICI
-        </a>{" "}
-        pour atteindre la section{" "}
-        <span className="font-bold text-slate-500">résultat</span>
-      </Alert> */}
+      <Alert className="mb-10" variant="filled" severity="info">
+        Sur cette page vous avez la liste des candidats. Cliquez sur le bouton{" "}
+        <span className="text-slate-900 font-bold">Résultats</span> pour
+        rechercher les résultats de cette classe.
+      </Alert>
       <div className="mb-10 border-b border-slate-700 pb-10 sm:flex space-y-5 sm:space-y-0 items-center justify-end sm:space-x-10">
         <BaseButton
           to="/mon-profil"
@@ -79,7 +126,7 @@ const DetailsClass = () => {
         </BaseButton>
       </div>
 
-      <div className="mb-10 border-b border-slate-700 pb-10">
+      <div className="mb-10">
         {classData.students && (
           <Pagination
             itemPerPage={itemPerPage}
@@ -96,9 +143,13 @@ const DetailsClass = () => {
         />
       </div>
 
-      <div className="mb-10">
-        <Results data={classData} />
-      </div>
+      {/* Results button */}
+      <button
+        onClick={handleResults}
+        className="fixed right-5 md:right-10 bottom-10 md:bottom-[75px] bg-sky-600 px-4 py-2 rounded-full hover:bg-sky-800"
+      >
+        Résultats
+      </button>
     </div>
   );
 };
