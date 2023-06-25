@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 import Routage from "./src/router";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
