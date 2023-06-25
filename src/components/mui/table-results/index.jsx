@@ -1,5 +1,5 @@
-export default function ResultsTable({ students, results }) {
-  return ( 
+export default function ResultsTable({ results }) {
+  return (
     <div className="">
       <div className="mt-8 flow-root">
         <div className="-my-2 overflow-x-auto">
@@ -45,44 +45,30 @@ export default function ResultsTable({ students, results }) {
                   </th>
                 </tr>
               </thead>
-              {results.length === students.length ? (
-                <tbody className="divide-y divide-slate-800 bg-transparent">
-                  {results.map((person, index) => (
-                    <tr
-                      key={person["N°Ins."]}
-                      className="divide-x divide-slate-800"
-                    >
-                      <td className="whitespace-nowrap p-4 text-sm font-medium text-slate-500">
-                        {index + 1}
-                      </td>
-                      <td className="whitespace-nowrap p-4 text-sm font-medium text-slate-500">
-                        {person.lastname}
-                      </td>
-                      <td className="whitespace-nowrap p-4 text-sm text-slate-500">
-                        {person.firstname}
-                      </td>
-                      <td className="whitespace-nowrap p-4 text-sm text-slate-500">
-                        {person.examCenter}
-                      </td>
-                      <td className="whitespace-nowrap text-center p-4 text-sm text-slate-500">
-                        {person.jury}
-                      </td>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-slate-500 sm:pr-0">
-                        {person.verdict}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              ) : (
-                <tbody>
-                  <tr>
-                    <td colSpan={5} className="animate-pulse py-10 text-center">
-                      Chargement en cours . . .{" "}
-                      {Math.floor((results.length * 100) / students.length)} %
+              <tbody className="divide-y divide-slate-800 bg-transparent">
+                {results.map((person, index) => (
+                  <tr key={index} className="divide-x divide-slate-800">
+                    <td className="whitespace-nowrap p-4 text-sm font-medium text-slate-500">
+                      {index + 1}
+                    </td>
+                    <td className="whitespace-nowrap p-4 text-sm font-medium text-slate-500">
+                      {person.lastname}
+                    </td>
+                    <td className="whitespace-nowrap p-4 text-sm text-slate-500">
+                      {person.firstname}
+                    </td>
+                    <td className="whitespace-nowrap p-4 text-sm text-slate-500">
+                      {person.examCenter}
+                    </td>
+                    <td className="whitespace-nowrap text-center p-4 text-sm text-slate-500">
+                      {person.jury}
+                    </td>
+                    <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-slate-500 sm:pr-0">
+                      {person.verdict}
                     </td>
                   </tr>
-                </tbody>
-              )}
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
