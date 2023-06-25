@@ -6,7 +6,14 @@ const Footer = () => {
   return (
     <footer className="px-10 border-t border-slate-700 h-40 sm:h-24 w-full flex-col sm:flex-row flex items-center sm:justify-between justify-center space-y-2 sm:space-y-0">
       <p>
-        Made with ❤️ by <span className="font-black">Le Dev Matheux</span>
+        Made with <span className="inline-block animate-bounce">❤️</span> by{" "}
+        <a
+          href="https://ledevmatheux.me"
+          target="_blank"
+          className="font-semibold underline"
+        >
+          Le Dev Matheux
+        </a>
       </p>
       <p>© copyright - {new Date().getFullYear()}</p>
       <div className="flex items-center">

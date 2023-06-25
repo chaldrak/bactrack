@@ -4,7 +4,7 @@ function classNames(...classes) {
 
 export default function BaseTabs({ tabs, current, setCurrent }) {
   return (
-    <div>
+    <div className="sticky top-16 bg-[#0F172A]">
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
           Select a tab

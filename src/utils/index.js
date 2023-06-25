@@ -12,3 +12,19 @@ export const getInitials = (name) => {
   }
   return initials;
 };
+
+export const sortInAlphabeticOrder = (tab) => {
+  if (!tab) return [];
+  return tab.sort((a, b) => {
+    const nameA = a.lastname.toUpperCase();
+    const nameB = b.lastname.toUpperCase();
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+};

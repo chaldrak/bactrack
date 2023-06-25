@@ -4,6 +4,7 @@ import createAxiosInstance from "../../services/axios-instance";
 import BaseBackdrop from "../mui/backdrop";
 import ResultsTable from "../mui/table-results";
 import BaseTabs from "../common/base-tabs";
+import { sortInAlphabeticOrder } from "../../utils";
 
 const tabs = [
   { name: "Général", index: 0 },
@@ -14,24 +15,26 @@ const tabs = [
 
 const Results = ({ results, students }) => {
   const [current, setCurrent] = useState(0);
+
+  switch (current) {
+    case 1:
+      results = results.filter((item) => item.verdict !== "Refuse");
+      break;
+
+    case 2:
+      results = results.filter((item) => item.verdict === "Refuse");
+      break;
+
+    default:
+      break;
+  }
   return (
     <section className="">
       <BaseTabs tabs={tabs} current={current} setCurrent={setCurrent} />
       {current !== 3 && (
         <ResultsTable
           students={students}
-          results={results?.sort((a, b) => {
-            const nameA = a.lastname.toUpperCase();
-            const nameB = b.lastname.toUpperCase();
-
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            return 0;
-          })}
+          results={sortInAlphabeticOrder(results)}
         />
       )}
       {current === 3 && <div>Yo</div>}

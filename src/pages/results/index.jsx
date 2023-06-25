@@ -10,6 +10,10 @@ import BaseBackdrop from "../../components/mui/backdrop";
 const ResultsPage = ({ isLoading, setOpen, results, data }) => {
   const { serie, schoolYear, students } = data;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-[calc(100vh-65px)] sm:px-10 py-10 px-5">
       <p
