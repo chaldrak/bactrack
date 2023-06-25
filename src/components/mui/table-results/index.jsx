@@ -1,5 +1,5 @@
 export default function ResultsTable({ students, results }) {
-  return (
+  return ( 
     <div className="">
       <div className="mt-8 flow-root">
         <div className="-my-2 overflow-x-auto">
