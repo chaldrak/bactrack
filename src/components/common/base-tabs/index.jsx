@@ -12,11 +12,15 @@ export default function BaseTabs({ tabs, current, setCurrent }) {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-slate-300 py-2 pl-3 pr-10 text-base focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-          //   defaultValue={tabs.find((tab) => tab.current).name}
+          className="block w-full rounded-md border-slate-300 py-2 pl-3 pr-10 text-base focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm bg-slate-800"
+          //   defaultValue={tabs.find((tab) => tab.index === current).name}
+          value={current}
+          onChange={(e) => setCurrent(parseInt(e.target.value))}
         >
           {tabs.map((tab) => (
-            <option key={tab.name}>{tab.name}</option>
+            <option key={tab.name} value={tab.index}>
+              {tab.name}
+            </option>
           ))}
         </select>
       </div>
