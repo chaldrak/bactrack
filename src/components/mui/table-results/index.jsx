@@ -6,7 +6,7 @@ export default function ResultsTable({ results }) {
           <div className="inline-block min-w-full py-2 align-middle">
             <table className="min-w-full divide-y divide-slate-700">
               <thead className="bg-slate-500">
-                <tr className="divide-x divide-slate-700">
+                <tr className="divide-x divide-slate-700 [&_th]:whitespace-nowrap">
                   <th
                     scope="col"
                     className="py-3.5 px-4 text-left text-sm font-semibold text-slate-900"
