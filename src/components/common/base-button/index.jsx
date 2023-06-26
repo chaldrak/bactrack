@@ -39,6 +39,7 @@ const BaseButton = ({
           theme
         )} ${createBorder(border)}`}
         rel="noreferer"
+        onClick={onClick}
       >
         {children}
         <span className="whitespace-nowrap">{title}</span>
