@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BaseButton from "../../components/common/base-button";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { Alert } from "@mui/material";
-import { getDoc } from "firebase/firestore";
+import { getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { docRef } from "../../../firebase/config";
 import { Link, useParams } from "react-router-dom";
 import DataTable from "../../components/mui/table-students";
@@ -10,14 +10,21 @@ import { BiArrowBack, BiEdit } from "react-icons/bi";
 import Pagination from "../../components/common/pagination";
 import ResultsPage from "../results";
 import createAxiosInstance from "../../services/axios-instance";
-import { errorToast } from "../../utils/toast";
+import { errorToast, successToast } from "../../utils/toast";
+import ResponsiveDialog from "../../components/mui/dialog";
+import EditClassDialog from "../../components/mui/edit-class-dialog";
+import { schoolYears } from "../../constants";
 
 const DetailsClass = () => {
   const [classData, setClassData] = useState({ students: [] });
   const { id } = useParams();
   const [open, setOpen] = useState(true);
+  const [openEditModal, setOpenEditModal] = useState(false);
+
+  const [editSchoolYear, setEditSchoolYear] = useState(`${schoolYears[0]}`);
 
   const [results, setResults] = useState([]);
+  const [errors, setErrors] = useState([]);
   const { schoolYear, students } = classData;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +36,17 @@ const DetailsClass = () => {
   const lastItemIndex = currentPage * itemPerPage;
   const firstItemIndex = lastItemIndex - itemPerPage + 1;
 
+  const handleEdit = () => {
+    updateDoc(docRef(id), { schoolYear: editSchoolYear })
+      .then(() => {
+        setOpenEditModal(false);
+        successToast("Cette classe a été mise à jour avec succès.");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleResults = () => {
     setIsLoading(true);
     setOpen(!open);
@@ -37,30 +55,25 @@ const DetailsClass = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      getDoc(docRef(id))
-        .then((doc) => {
-          setClassData(doc.data());
-        })
-        .catch((error) => {
-          console.log(error);
-          setOpen(true);
-          errorToast("Problème de connexion. Veuillez réessayez !");
-          return;
-        })
-        .finally(() => {});
+      onSnapshot(docRef(id), (doc) => {
+        setClassData(doc.data());
+      });
     };
     fetchData();
   }, []);
 
   const getResults = async () => {
     setResults([]);
+    let errorsData = [];
     setIsLoading(true);
     try {
       students.forEach(async (person) => {
-        await fetchResult(person["N°Tab"]);
+        const response = await fetchResult(person["N°Tab"]);
+        errorsData.push(response);
       });
+      setErrors(errorsData);
     } catch (error) {
-      console.log(err);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +85,7 @@ const DetailsClass = () => {
       setResults((prev) => [...prev, response.data]);
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error.code;
     }
   };
 
@@ -83,13 +96,14 @@ const DetailsClass = () => {
         results={results}
         isLoading={isLoading}
         setOpen={setOpen}
+        errors={errors}
       />
     );
   return (
     <div className="min-h-[calc(100vh-65px)] sm:px-10 py-10 px-5">
       <Link
         to="/tableau-de-bord"
-        className="flex items-center gap-x-2 mb-5 hover:text-slate-500"
+        className="flex w-fit items-center gap-x-2 mb-5 hover:text-slate-500"
       >
         <BiArrowBack /> <span>Retour</span>
       </Link>
@@ -105,12 +119,13 @@ const DetailsClass = () => {
       </Alert>
       <div className="mb-10 border-b border-slate-700 pb-10 sm:flex space-y-5 sm:space-y-0 items-center justify-end sm:space-x-10">
         <BaseButton
-          to="/mon-profil"
+          to="#"
           title="Modifier"
           variant="outline"
           theme="gray"
           tag="Link"
           border={true}
+          onClick={() => setOpenEditModal(true)}
         >
           <BiEdit size={20} />
         </BaseButton>
@@ -150,6 +165,16 @@ const DetailsClass = () => {
       >
         Résultats
       </button>
+
+      <EditClassDialog
+        open={openEditModal}
+        setOpen={setOpenEditModal}
+        value={editSchoolYear}
+        onChange={(e) => setEditSchoolYear(e.target.value)}
+        classData={classData}
+        onSubmit={handleEdit}
+        // setForm={setForm}
+      />
     </div>
   );
 };

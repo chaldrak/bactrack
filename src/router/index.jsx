@@ -14,7 +14,6 @@ import AuthRequired from "../components/authentication";
 import { DataProvider } from "../context";
 import CreateClass from "../pages/create-class";
 import DetailsClass from "../pages/details-class";
-import ResultsPage from "../pages/results";
 import ScrollToTop from "../components/common/scroll-to-top";
 
 const Routage = () => {
@@ -35,14 +34,13 @@ const Routage = () => {
               <Route path="/creer-une-classe" element={<CreateClass />} />
               <Route path="/mon-profil" element={<div />} />
               <Route path="/classes/:id" element={<DetailsClass />} />
-              <Route path="/classes/:id/resultats" element={<ResultsPage />} />
             </Route>
 
             {/* Catch all routes */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Footer />
-          <ToastContainer />
+          <ToastContainer limit={1} />
         </DataProvider>
       </Router>
     </div>
