@@ -18,6 +18,7 @@ const DetailsClass = () => {
   const [open, setOpen] = useState(true);
 
   const [results, setResults] = useState([]);
+  const [errors, setErrors] = useState([]);
   const { schoolYear, students } = classData;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,7 +45,6 @@ const DetailsClass = () => {
         .catch((error) => {
           console.log(error);
           setOpen(true);
-          errorToast("Problème de connexion. Veuillez réessayez !");
           return;
         })
         .finally(() => {});
@@ -54,13 +54,16 @@ const DetailsClass = () => {
 
   const getResults = async () => {
     setResults([]);
+    let errorsData = [];
     setIsLoading(true);
     try {
       students.forEach(async (person) => {
-        await fetchResult(person["N°Tab"]);
+        const response = await fetchResult(person["N°Tab"]);
+        errorsData.push(response);
       });
+      setErrors(errorsData);
     } catch (error) {
-      console.log(err);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +75,7 @@ const DetailsClass = () => {
       setResults((prev) => [...prev, response.data]);
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error.code;
     }
   };
 
@@ -83,13 +86,14 @@ const DetailsClass = () => {
         results={results}
         isLoading={isLoading}
         setOpen={setOpen}
+        errors={errors}
       />
     );
   return (
     <div className="min-h-[calc(100vh-65px)] sm:px-10 py-10 px-5">
       <Link
         to="/tableau-de-bord"
-        className="flex items-center gap-x-2 mb-5 hover:text-slate-500"
+        className="flex w-fit items-center gap-x-2 mb-5 hover:text-slate-500"
       >
         <BiArrowBack /> <span>Retour</span>
       </Link>

@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import useAuth from "../../hooks/authentication";
-import createAxiosInstance from "../../services/axios-instance";
-import BaseBackdrop from "../mui/backdrop";
+import { useState } from "react";
 import ResultsTable from "../mui/table-results";
 import BaseTabs from "../common/base-tabs";
 import { sortInAlphabeticOrder } from "../../utils";
