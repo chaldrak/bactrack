@@ -34,3 +34,11 @@ body {
 option:hover {
     background: #1882A8;
 }
+
+@media print {
+    html, body {
+      height: 100%;
+      margin: 0 !important;
+      padding: 10px 0 !important;
+    }
+  }
