@@ -49,7 +49,7 @@ const DetailsClass = () => {
 
   const handleResults = () => {
     setIsLoading(true);
-    setOpen(!open);
+    setOpen(false);
     getResults();
   };
 
@@ -63,6 +63,13 @@ const DetailsClass = () => {
   }, []);
 
   const getResults = async () => {
+    if (!axios) {
+      errorToast(
+        "Les résultats que vous désirez ne sont pas encore disponibles. Merci de réessayer plus tard."
+      );
+      setOpen(true);
+      return;
+    }
     setResults([]);
     let errorsData = [];
     setIsLoading(true);

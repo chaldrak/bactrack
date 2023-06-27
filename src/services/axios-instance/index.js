@@ -6,6 +6,7 @@ const baseURL = {
 };
 
 const createAxiosInstance = (session) => {
+  if (!baseURL[session]) return null;
   const instance = axios.create({
     baseURL: baseURL[session],
     headers: {

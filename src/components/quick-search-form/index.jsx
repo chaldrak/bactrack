@@ -26,7 +26,6 @@ const QuickSearchForm = () => {
     const axios = createAxiosInstance(form.session);
     try {
       const response = await axios.get(form.tableNumber);
-      console.log(response.data);
       setResult(response.data);
       setOpen(true);
     } catch (error) {
