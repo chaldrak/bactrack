@@ -43,7 +43,12 @@ const ResultsPage = ({ setOpen, results, data, errors }) => {
       </span>
       <section className="">
         {results.length === students.length ? (
-          <Results students={students} results={results} />
+          <Results
+            students={students}
+            results={results}
+            serie={serie}
+            schoolYear={schoolYear}
+          />
         ) : (
           <div colSpan={5} className="animate-pulse py-20 text-center">
             <p>

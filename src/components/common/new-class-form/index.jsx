@@ -73,13 +73,7 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-x-6">
-        <Link
-          to="/tableau-de-bord"
-          className="text-sm font-semibold leading-6 text-white"
-        >
-          Cancel
-        </Link>
-        <div className="w-[200px] md:w-[300px]">
+        <div className="w-full md:w-1/2">
           <BaseButton
             tag="button"
             title="Créer"
@@ -89,6 +83,12 @@ const NewClassForm = ({ classData, onChange, data, onSubmit }) => {
             disabled={students.length === 0}
           />
         </div>
+        <Link
+          to="/tableau-de-bord"
+          className="text-sm font-semibold leading-6 text-white"
+        >
+          Cancel
+        </Link>
       </div>
     </form>
   );
