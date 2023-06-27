@@ -33,25 +33,13 @@ const Results = ({ results, students, serie, schoolYear }) => {
   const handlePrint = useReactToPrint({
     content: () => documentRef.current,
     documentTitle: `bactrack_resultats_BAC_${serie}_${schoolYear}_${uuidv4()}`,
-    pageStyle: "print",
+    pageStyle: " @page { size: landscape; } ",
   });
-
-  const getPageMargins = () => {
-    return `@page { margin: ${10} ${10} ${10} ${10} !important; }`;
-  };
 
   return (
     <section className="">
       <BaseTabs tabs={tabs} current={current} setCurrent={setCurrent} />
       <div ref={documentRef}>
-        <style type="text/css" media="print">
-          {
-            "\
-  @page { size: landscape; }\
-"
-          }
-          {getPageMargins()}
-        </style>
         {current !== 3 && (
           <ResultsTable
             students={students}
