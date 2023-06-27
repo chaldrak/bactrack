@@ -3,6 +3,7 @@ import ResultsTable from "../mui/table-results";
 import BaseTabs from "../common/base-tabs";
 import { sortInAlphabeticOrder } from "../../utils";
 import { useReactToPrint } from "react-to-print";
+import { v4 as uuidv4 } from "uuid";
 
 const tabs = [
   { name: "Général", index: 0 },
@@ -11,7 +12,7 @@ const tabs = [
   { name: "Statistiques", index: 3 },
 ];
 
-const Results = ({ results, students }) => {
+const Results = ({ results, students, serie, schoolYear }) => {
   const [current, setCurrent] = useState(0);
 
   switch (current) {
@@ -31,13 +32,13 @@ const Results = ({ results, students }) => {
 
   const handlePrint = useReactToPrint({
     content: () => documentRef.current,
-    documentTitle: `PNL_Solution_reporting`,
+    documentTitle: `bactrack_resultats_BAC_${serie}_${schoolYear}_${uuidv4()}`,
   });
 
   return (
     <section className="">
+      <BaseTabs tabs={tabs} current={current} setCurrent={setCurrent} />
       <div ref={documentRef}>
-        <BaseTabs tabs={tabs} current={current} setCurrent={setCurrent} />
         {current !== 3 && (
           <ResultsTable
             students={students}
