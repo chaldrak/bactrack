@@ -3,6 +3,7 @@ import BaseButton from "../../components/common/base-button";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { Alert } from "@mui/material";
 import {
+  deleteDoc,
   getDoc,
   getDocs,
   onSnapshot,
@@ -11,24 +12,27 @@ import {
   where,
 } from "firebase/firestore";
 import { colRef, docRef } from "../../../firebase/config";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DataTable from "../../components/mui/table-students";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
 import Pagination from "../../components/common/pagination";
 import ResultsPage from "../results";
 import createAxiosInstance from "../../services/axios-instance";
-import { errorToast, successToast } from "../../utils/toast";
+import { errorToast, successToast, infoToast } from "../../utils/toast";
 import ResponsiveDialog from "../../components/mui/dialog";
 import EditClassDialog from "../../components/mui/edit-class-dialog";
 import { schoolYears } from "../../constants";
 import useAuth from "../../hooks/authentication";
+import DeleteClassDialog from "../../components/mui/delete-class-dialog";
 
 const DetailsClass = () => {
   const user = useAuth();
   const [classData, setClassData] = useState({ students: [] });
   const { id } = useParams();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [editSchoolYear, setEditSchoolYear] = useState(`${schoolYears[0]}`);
 
@@ -45,6 +49,15 @@ const DetailsClass = () => {
 
   const lastItemIndex = currentPage * itemPerPage;
   const firstItemIndex = lastItemIndex - itemPerPage + 1;
+
+  const deleteClass = async () => {
+    await deleteDoc(docRef(id))
+      .then(() => {
+        navigate("/tableau-de-bord", { replace: true });
+        infoToast("Classe supprimée avec succès.");
+      })
+      .catch((error) => console.log(error));
+  };
 
   const handleEdit = () => {
     if (classAlreadyExists()) {
@@ -175,12 +188,13 @@ const DetailsClass = () => {
           <BiEdit size={20} />
         </BaseButton>
         <BaseButton
-          to="/mon-profil"
+          to="#"
           title="Supprimer"
           variant="contain"
           theme="red"
           tag="Link"
           border={true}
+          onClick={() => setOpenDeleteModal(true)}
         >
           <RiDeleteBin5Line size={20} />
         </BaseButton>
@@ -218,7 +232,12 @@ const DetailsClass = () => {
         onChange={(e) => setEditSchoolYear(e.target.value)}
         classData={classData}
         onSubmit={handleEdit}
-        // setForm={setForm}
+      />
+      <DeleteClassDialog
+        open={openDeleteModal}
+        setOpen={setOpenDeleteModal}
+        onClick={deleteClass}
+        classData={classData}
       />
     </div>
   );

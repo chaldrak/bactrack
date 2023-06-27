@@ -14,3 +14,7 @@ export const errorToast = (message) => {
 export const successToast = (message) => {
   toast.success(message, options);
 };
+
+export const infoToast = (message) => {
+  toast.info(message, options);
+};
