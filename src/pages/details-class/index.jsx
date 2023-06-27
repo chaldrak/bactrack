@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import BaseButton from "../../components/common/base-button";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { Alert } from "@mui/material";
-import { getDoc, onSnapshot, updateDoc } from "firebase/firestore";
-import { docRef } from "../../../firebase/config";
+import {
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { colRef, docRef } from "../../../firebase/config";
 import { Link, useParams } from "react-router-dom";
 import DataTable from "../../components/mui/table-students";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
@@ -14,8 +21,10 @@ import { errorToast, successToast } from "../../utils/toast";
 import ResponsiveDialog from "../../components/mui/dialog";
 import EditClassDialog from "../../components/mui/edit-class-dialog";
 import { schoolYears } from "../../constants";
+import useAuth from "../../hooks/authentication";
 
 const DetailsClass = () => {
+  const user = useAuth();
   const [classData, setClassData] = useState({ students: [] });
   const { id } = useParams();
   const [open, setOpen] = useState(true);
@@ -24,6 +33,7 @@ const DetailsClass = () => {
   const [editSchoolYear, setEditSchoolYear] = useState(`${schoolYears[0]}`);
 
   const [results, setResults] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [errors, setErrors] = useState([]);
   const { schoolYear, students } = classData;
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +47,13 @@ const DetailsClass = () => {
   const firstItemIndex = lastItemIndex - itemPerPage + 1;
 
   const handleEdit = () => {
+    if (classAlreadyExists()) {
+      setIsLoading(false);
+      return errorToast(
+        "Cette classe existe déjà pour l'année scolaire choisie."
+      );
+    }
+
     updateDoc(docRef(id), { schoolYear: editSchoolYear })
       .then(() => {
         setOpenEditModal(false);
@@ -49,7 +66,7 @@ const DetailsClass = () => {
 
   const handleResults = () => {
     setIsLoading(true);
-    setOpen(!open);
+    setOpen(false);
     getResults();
   };
 
@@ -63,6 +80,13 @@ const DetailsClass = () => {
   }, []);
 
   const getResults = async () => {
+    if (!axios) {
+      errorToast(
+        "Les résultats que vous désirez ne sont pas encore disponibles. Merci de réessayer plus tard."
+      );
+      setOpen(true);
+      return;
+    }
     setResults([]);
     let errorsData = [];
     setIsLoading(true);
@@ -88,6 +112,27 @@ const DetailsClass = () => {
       return error.code;
     }
   };
+
+  const classAlreadyExists = () => {
+    const data = classes.filter(
+      (c) => c.schoolYear == editSchoolYear && c.serie == classData.serie
+    );
+    return data.length > 0;
+  };
+
+  useEffect(() => {
+    const q = query(colRef, where("user_id", "==", user.uid));
+    const fetchData = () => {
+      onSnapshot(q, (snapshot) => {
+        let data = [];
+        snapshot.docs.forEach((doc) => {
+          data.push({ ...doc.data(), id: doc.id });
+        });
+        setClasses(data);
+      });
+    };
+    fetchData();
+  }, []);
 
   if (!open)
     return (
